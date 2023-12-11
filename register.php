@@ -23,24 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     } else {
         $e = mysqli_real_escape_string($link, trim($_POST['email']));
     }
-    #check for DOB
-    if (empty($_POST['d_o_b'])) {
-        $errors[] = 'Enter your D.O.B.';
-    } else {
-        $dob = mysqli_real_escape_string($link, trim($_POST['d_o_b']));
-    }
-    #check for contact number
-    if (empty($_POST['c_num'])) {
-        $errors[] = 'Enter your Contact Number.';
-    } else {
-        $cn = mysqli_real_escape_string($link, trim($_POST['c_num']));
-    }
-    #check for country
-    if (empty($_POST['country'])) {
-        $errors[] = 'Enter your Country.';
-    } else {
-        $co = mysqli_real_escape_string($link, trim($_POST['country']));
-    }
+
     #check for a password and matching input password
     if (!empty($_POST['pass1']))
     {
@@ -67,12 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $checked = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$_POST['g-recaptcha-response']);
 
     $response = json_decode($checked);
-
-    if (!$response->success) {
-        $errors[] = 'Confirm you are not a robot!';
-    } else {
-        $eb = mysqli_real_escape_string($link, trim($_POST['e_bot']));
-    }
+     // statement for checking recaptcha is signed 
+//    if (!$response->success) {
+//        $errors[] = 'Confirm you are not a robot!';
+//    } else {
+//        $eb = mysqli_real_escape_string($link, trim($_POST['e_bot']));
+//    }
 
     #check if email address already registered
     if (empty($errors))
@@ -84,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     #on success register user inserting into 'user' database table
     if (empty($errors))
     {
-        $q = "INSERT INTO users (first_name, last_name, email, pass, reg_date, d_o_b, c_num, country)
- VALUES ('$fn', '$ln', '$e', SHA2('$p', 256), NOW(), '$dob', '$cn', '$co')";
+        $q = "INSERT INTO users (first_name, last_name, email, pass, reg_date)
+ VALUES ('$fn', '$ln', '$e', SHA2('$p', 256), NOW())";
         $r = @mysqli_query($link, $q);
         if ($r)
         {
@@ -172,33 +155,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <div class="form-group col-md-6">
             <input type="text"
                    class="form-control"
-                   placeholder="Date Of Birth"
-                   name="d_o_b"
-                   required size="20"
-                   value="<?php if (isset($_POST['d_o_b'])) echo $_POST['d_o_b']; ?>">
-        </div>
-        <br>
-        <hr>
-        <div class="form-group col-md-6">
-            <input type="text"
-                   class="form-control"
                    placeholder="Contact Number"
                    name="c_num"
                    required size="20"
                    value="<?php if (isset($_POST['c_num'])) echo $_POST['c_num']; ?>">
         </div>
-        </div>
-        <div class="form-row">
-        <br>
-        <hr>
-        <div class="form-group col-md-6">
-            <input type="text"
-                   class="form-control"
-                   placeholder="Country"
-                   name="country"
-                   required size="20"
-                   value="<?php if (isset($_POST['country'])) echo $_POST['country']; ?>">
-        </div>
+
         <br>
         <hr>
         <div class="form-group col-md-6">
@@ -242,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         </label>-->
 
         <div class="alert alert-primary" role="alert">
-            Terms and Conditions <a href="t&c.html" target="_blank" class="alert-link">link</a>. Accept Terms & Conditions: <label>
+            Terms and Conditions <a href="terms&conditionsMKTIME.html" target="_blank" class="alert-link">link</a>. Accept Terms & Conditions: <label>
                 <input type="checkbox" name="conditions"/>
                 <?php if (isset($_POST['conditions'])) echo $_POST['conditions']; ?>
             </label>
