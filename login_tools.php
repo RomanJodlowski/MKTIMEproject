@@ -33,7 +33,7 @@ function validate( $link, $email = '', $pwd = '')
 # On success retrieve user_id, firstname, and lastname from 'view_users' database.
     if ( empty( $errors ) )
     {
-        $q = "SELECT user_id, firstname, lastname FROM view_users WHERE email='$e' AND pass=SHA2('$p',256)" ;
+        $q = "SELECT user_id, first_name, last_name FROM view_users WHERE email='$e' AND pass=SHA2('$p',256)" ;
         $r = mysqli_query ( $link, $q ) ;
         if ( @mysqli_num_rows( $r ) == 1 )
         {
