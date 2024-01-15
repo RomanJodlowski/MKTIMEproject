@@ -1,11 +1,14 @@
 <?php
 # Access session.
-session_start() ;
+session_start();
 # Redirect if not logged in.
-if ( !isset( $_SESSION[ 'user_id' ] ) ) { require ( 'login_tools.php' ) ; load() ; }
+if (!isset($_SESSION['user_id'])) {
+    require('login_tools.php');
+    load();
+}
 
 echo "<p>Welcome to MK Time Brand, {$_SESSION['first_name']} {$_SESSION['last_name']} </p>";
-$page_title = 'home' ;
+$page_title = 'home';
 
 # Open database connection.
-require ( 'connect_db.php' ) ;
+require('connect_db.php');
