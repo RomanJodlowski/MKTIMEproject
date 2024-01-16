@@ -3,7 +3,7 @@
 # Connect  on 'localhost' 'change username' 'change password' 'change database name'.
 
 
-$link = mysqli_connect('localhost','HNDSOFT2SA1','33vFmXSEfG','HNDSOFT2SA1');
+$link = mysqli_connect('localhost','root','','mktime');
 if (!$link) { 
 # Otherwise fail gracefully and explain the error. 
 	die('Could not connect to MySQL: ' . mysqli_error()); 
