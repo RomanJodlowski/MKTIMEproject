@@ -150,6 +150,7 @@ if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['car
     }, \'#paypal-button-container\');
 </script>
 ';
+		include ('footer.html');
         }
         # Remove cart items.
         $_SESSION['cart'] = NULL ;
