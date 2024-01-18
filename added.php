@@ -24,7 +24,7 @@
 
 <?php
 session_start() ;
-//include('header.php');
+
 # Redirect if not logged in.
 if ( !isset( $_SESSION[ 'user_id' ] ) ) { require ( 'login_tools.php' ) ; load() ; }
 
@@ -74,7 +74,7 @@ if ( mysqli_num_rows( $r ) == 1 )
 		</div>' ;
   }
 }
-
+include('home.php');
 # Close database connection.
 mysqli_close($link);
 ?>
